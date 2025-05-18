@@ -117,12 +117,6 @@ Run inference with the base model:
 python inference.py --mode single --model base --video videos/test_video.mp4 --output results/output.mp4
 ```
 
-### Advanced Options
-Process with custom detection settings:
-```bash
-python inference.py --mode single --model base --video videos/test_video.mp4 --output results/output.mp4 --conf 0.4 --iou 0.5 --img-size 640
-```
-
 Compare base and enhanced models:
 ```bash
 python inference.py --mode compare --video videos/test_video.mp4 --output-dir results --max-frames 200
@@ -192,6 +186,8 @@ The tool measures:
   - Verify model paths are correct
   - Ensure models are downloaded/available
   - Check format compatibility
+
+### Below are experimental might /might not work
 
 - **Display Issues**:
   - Use `--no-display` if running in a headless environment
