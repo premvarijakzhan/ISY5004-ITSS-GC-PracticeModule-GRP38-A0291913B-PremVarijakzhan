@@ -241,45 +241,9 @@ python inference.py --mode single --model enhanced --enhanced-model models/enhan
 # Side-by-side model comparison (base vs. enhanced)
 python inference.py --mode compare --base-model models/base_yolov12n.pt --enhanced-model models/enhanced_yolov12n.pt --video videos/test.mp4 --output-dir results/comparison --max-frames 300 --show-plots
 
-# High-precision detection (higher confidence, lower IoU)
-python inference.py --mode single --model base --video videos/test_video.mp4 --output results/high_precision.mp4 --conf 0.6 --iou 0.3
-
-# High-recall detection (lower confidence, higher IoU)
-python inference.py --mode single --model base --video videos/test_video.mp4 --output results/high_recall.mp4 --conf 0.2 --iou 0.6
-
-# Fast processing with smaller image size
-python inference.py --mode single --model base --video videos/test_video.mp4 --output results/faster.mp4 --img-size 416
-
-# Process video segment (frames 1000-1500)
-python inference.py --mode single --model base --video videos/test_video.mp4 --start-frame 1000 --max-frames 500 --output results/segment.mp4
-
 # Interactive mode for guided operation
 python inference.py --mode interactive --video videos/test_video.mp4
 
-# Save detection results as JSON
-python inference.py --mode single --model base --video videos/test_video.mp4 --output results/output.mp4 --save-detections
-```
-
-## Usage Examples
-
-### Basic Object Detection
-```bash
-python inference.py --mode single --model base --video videos/street.mp4 --output results/detected.mp4
-```
-
-### Processing a Specific Segment
-```bash
-python inference.py --mode single --model base --video videos/long_video.mp4 --start-frame 1000 --max-frames 500 --output results/segment.mp4
-```
-
-### Full Model Comparison
-```bash
-python inference.py --mode compare --video videos/test.mp4 --output-dir results/comparison --max-frames 300 --show-plots
-```
-
-### Detection with Custom Thresholds
-```bash
-python inference.py --mode single --model base --video videos/test.mp4 --output results/high_conf.mp4 --conf 0.6 --iou 0.4
 ```
 
 ## License
