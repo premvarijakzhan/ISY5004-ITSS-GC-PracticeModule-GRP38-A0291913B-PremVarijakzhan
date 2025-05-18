@@ -106,7 +106,7 @@ The project includes three YOLO models:
 
 1. **Base Model**: `base_yolov12n.pt` - Standard YOLOv12n model
 2. **Enhanced Model**: `enhanced_yolov12n.pt` - Enhanced version with improvements
-3. **Quantized Model**: `enhanced_yolov12n_quantized.pt` - Optimized quantized version
+3. **Quantized Model**: `enhanced_yolov12n_quantized.pt` - Optimized quantized version - available in the `Archieve/Models/
 
 Additionally, ONNX versions of these models are available in the `Archieve/Models/` directory for deployment in production environments.
 
