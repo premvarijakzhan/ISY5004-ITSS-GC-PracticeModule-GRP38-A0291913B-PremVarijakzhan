@@ -176,7 +176,7 @@ python inference.py --mode guide
 ### Model Formats
 The script handles two types of models:
 - **Base Model**: Standard PyTorch model using Ultralytics YOLO API
-- **Enhanced Model**: Your custom improved model also using Ultralytics YOLO API
+- **Enhanced Model**: The custom improved model also using Ultralytics YOLO API
 
 ### Performance Metrics
 The tool measures:
