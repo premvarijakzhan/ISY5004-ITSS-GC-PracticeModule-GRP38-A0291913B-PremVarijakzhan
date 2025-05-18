@@ -44,8 +44,7 @@ This tool allows you to:
 
 ### Prerequisites
 - Python 3.8+
-- GPU support is optional but recommended for faster processing
-
+- Runs in CPU
 ### Setup Environment
 ```bash
 # Create a virtual environment
