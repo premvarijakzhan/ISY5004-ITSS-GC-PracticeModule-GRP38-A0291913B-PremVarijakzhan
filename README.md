@@ -57,40 +57,57 @@ yolo_env\Scripts\activate
 # On macOS/Linux:
 source yolo_env/bin/activate
 
-# Install required packages
-pip install ultralytics opencv-python matplotlib tqdm
+# Install required packages from requirements.txt
+pip install -r requirements.txt
 ```
 
-### Directory Structure
-Create the following directory structure:
+### Project Structure
+The project has the following structure:
 ```
-yolo_project/
-├── inference.py      # Main script
-├── models/           # Store models here
-│   ├── yolo12n.pt    # Base YOLOv12n model
-│   └── enhanced_yolov12n.pt  # Your enhanced model
-├── videos/           # Input videos
-│   └── test_video.mp4
-└── results/          # Output directory
+ISY5004-ITSS-GC-PracticeModule-GRP38-A0291913B-PremVarijakzhan/
+├── Training/                         # Training notebooks
+│   ├── BaselineModel.ipynb
+│   └── EnhancedNewModel.ipynb
+├── Archieve/                         # Archived files
+│   ├── Models/                       # ONNX model files
+│   │   ├── best_model_int8.onnx
+│   │   ├── enhanced_yolov12n_quantized_int8.onnx
+│   │   ├── enhanced_yolov12n_quantized.onnx
+│   │   ├── yolov12n_enhanced_int8_optimized.onnx
+│   │   ├── yolov12n_enhanced_int8.onnx
+│   │   └── yolov12n_enhanced.onnx
+│   ├── results/
+│   │   └── quant_output.mp4
+│   └── Script/
+│       ├── Optimisation/
+│       │   ├── EnhancedModelOptimised.ipynb
+│       │   └── Optimisation.ipynb
+│       └── Training/
+│           ├── Enhanced_2.ipynb
+│           └── Enhanced.ipynb
+│   └── inference_with_quant.py
+├── models/                           # PyTorch model files
+│   ├── base_yolov12n.pt
+│   ├── enhanced_yolov12n_quantized.pt
+│   └── enhanced_yolov12n.pt
+├── results/                          # Results directory
+│   └── result_video_enhanced.mp4
+├── videos/                           # Input videos
+│   └── test.mp4
+├── .gitignore                        # Git ignore file
+├── inference.py                      # Main inference script
+├── README.md                         # This file
+└── requirements.txt                  # Python dependencies
 ```
 
-### Download Base Model
-```bash
-# For macOS/Linux:
-wget -P models/ https://github.com/ultralytics/assets/releases/download/v0.0.0/yolov12n.pt
+### Model Information
+The project includes three YOLO models:
 
-# For Windows:
-curl -L -o models/yolo12n.pt https://github.com/ultralytics/assets/releases/download/v0.0.0/yolov12n.pt
-```
+1. **Base Model**: `base_yolov12n.pt` - Standard YOLOv12n model
+2. **Enhanced Model**: `enhanced_yolov12n.pt` - Enhanced version with improvements
+3. **Quantized Model**: `enhanced_yolov12n_quantized.pt` - Optimized quantized version
 
-### Get Test Video (if needed)
-```bash
-# For macOS/Linux:
-wget -P videos/ https://github.com/ultralytics/assets/raw/main/test_video.mp4
-
-# For Windows:
-curl -L -o videos/test_video.mp4 https://github.com/ultralytics/assets/raw/main/test_video.mp4
-```
+Additionally, ONNX versions of these models are available in the `Archieve/Models/` directory for deployment in production environments.
 
 ## Usage
 
@@ -201,25 +218,31 @@ python -m venv yolo_env
 source yolo_env/bin/activate
 
 # Install dependencies
-pip install ultralytics opencv-python matplotlib tqdm
+pip install -r requirements.txt
 
-# Download base YOLOv12n model (Windows)
-curl -L -o models/yolo12n.pt https://github.com/ultralytics/assets/releases/download/v0.0.0/yolov12n.pt
+# Using base model
+python inference.py --mode single --model base --video videos/test.mp4 --output results/output.mp4
 
-# Download test video (Windows)
-curl -L -o videos/test_video.mp4 https://github.com/ultralytics/assets/raw/main/test_video.mp4
+# Using enhanced model
+python inference.py --mode single --model enhanced --video videos/test.mp4 --output results/enhanced_output.mp4
+
+# Using quantized model (for faster inference)
+python inference.py --mode single --model enhanced --base-model models/base_yolov12n.pt --enhanced-model models/enhanced_yolov12n_quantized.pt --video videos/test.mp4 --output results/quantized_output.mp4
 ```
 
 ### Ready-to-Use Inference Commands
 ```bash
 # Basic inference with base model
-python inference.py --mode single --model base --video videos/test_video.mp4 --output results/output.mp4
+python inference.py --mode single --model base --base-model models/base_yolov12n.pt --video videos/test.mp4 --output results/output.mp4
 
 # Basic inference with enhanced model
-python inference.py --mode single --model enhanced --video videos/test_video.mp4 --output results/enhanced_output.mp4
+python inference.py --mode single --model enhanced --enhanced-model models/enhanced_yolov12n.pt --video videos/test.mp4 --output results/enhanced_output.mp4
 
-# Side-by-side model comparison (300 frames)
-python inference.py --mode compare --video videos/test_video.mp4 --output-dir results/comparison --max-frames 300 --show-plots
+# Side-by-side model comparison (base vs. enhanced)
+python inference.py --mode compare --base-model models/base_yolov12n.pt --enhanced-model models/enhanced_yolov12n.pt --video videos/test.mp4 --output-dir results/comparison --max-frames 300 --show-plots
+
+# Side-by-side model comparison (base vs. quantized)
+python inference.py --mode compare --base-model models/base_yolov12n.pt --enhanced-model models/enhanced_yolov12n_quantized.pt --video videos/test.mp4 --output-dir results/comparison_quantized --max-frames 300 --show-plots
 
 # High-precision detection (higher confidence, lower IoU)
 python inference.py --mode single --model base --video videos/test_video.mp4 --output results/high_precision.mp4 --conf 0.6 --iou 0.3
