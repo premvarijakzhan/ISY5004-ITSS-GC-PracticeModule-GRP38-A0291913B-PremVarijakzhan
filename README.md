@@ -241,9 +241,6 @@ python inference.py --mode single --model enhanced --enhanced-model models/enhan
 # Side-by-side model comparison (base vs. enhanced)
 python inference.py --mode compare --base-model models/base_yolov12n.pt --enhanced-model models/enhanced_yolov12n.pt --video videos/test.mp4 --output-dir results/comparison --max-frames 300 --show-plots
 
-# Side-by-side model comparison (base vs. quantized)
-python inference.py --mode compare --base-model models/base_yolov12n.pt --enhanced-model models/enhanced_yolov12n_quantized.pt --video videos/test.mp4 --output-dir results/comparison_quantized --max-frames 300 --show-plots
-
 # High-precision detection (higher confidence, lower IoU)
 python inference.py --mode single --model base --video videos/test_video.mp4 --output results/high_precision.mp4 --conf 0.6 --iou 0.3
 
