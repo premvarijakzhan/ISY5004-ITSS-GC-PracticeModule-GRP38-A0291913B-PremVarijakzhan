@@ -222,8 +222,6 @@ python inference.py --mode single --model base --video videos/test.mp4 --output 
 # Using enhanced model
 python inference.py --mode single --model enhanced --video videos/test.mp4 --output results/enhanced_output.mp4
 
-# Using quantized model (for faster inference)
-python inference.py --mode single --model enhanced --base-model models/base_yolov12n.pt --enhanced-model models/enhanced_yolov12n_quantized.pt --video videos/test.mp4 --output results/quantized_output.mp4
 ```
 
 ### Ready-to-Use Inference Commands
